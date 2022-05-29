@@ -1,0 +1,21 @@
+<div style="text-align: center;">
+  <p style="font-size: 17px; font-weight: bold;">Etkinlik Daveti Gönder</p>
+<div style="max-width: 500px; display: inline-block; width: 100%; box-shadow: 10px 8px 11px 1px #cccccc; padding: 15px; border-radius: 10px;">
+<form [formGroup]="addInvitationForm">
+  <div class="mb-3">
+    <label for="email" class="form-label">E-Posta Adresi</label>
+    <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="email" autocomplete="off">
+  </div>
+  <div class="mb-3">
+    <label for="firstname" class="form-label">Ad</label>
+    <input type="text" class="form-control" formControlName="firstname" id="firstname" autocomplete="off">
+  </div>
+  <div class="mb-3">
+    <label for="lastname" class="form-label">Soyad</label>
+    <input type="text" class="form-control" formControlName="lastname" id="lastname" autocomplete="off">
+  </div>
+  <button *ngIf="invitating==false" (click)="sendInvitation()" type="submit" class="btn btn-primary">Davet Et</button>
+  <button *ngIf="invitating==true" type="submit" class="btn btn-primary"><i class="fa fa-spinner fa-spin"></i> Davet Et</button>
+</form>
+</div>
+</div>

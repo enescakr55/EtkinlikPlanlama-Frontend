@@ -1,0 +1,15 @@
+<div style="text-align:center;">
+<div class="card" style="width: 18rem; display: inline-block;">
+  <div style="text-align: center; padding-top: 20px;"><i class="fa fa-user fa-3x"></i></div>
+  <div class="card-body">
+    <h5 class="card-title">ES-Event Hesap Doğrulama</h5>
+    <div style="text-align: left;">
+      <p *ngIf="verified" class="card-text">Hesabınız doğrulandı. Artık etkinlik oluşturabilir ve mail adresinize gelen davetleri hesabınızdan yönetebilirsiniz.</p>
+      <p *ngIf="verified == false" class="card-text">Hesabınız doğrulanamadı.Tekrar deneyin veya yeni kod isteyin.</p>
+    </div>
+    <br/>
+    <a routerLink="/login" *ngIf="verified" class="btn btn-primary">Giriş sayfasına git</a>
+    <a href="#" *ngIf="verified == false" class="btn btn-primary">Tekrar kod iste</a>
+  </div>
+</div>
+</div>

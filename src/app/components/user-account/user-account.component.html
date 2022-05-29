@@ -1,0 +1,33 @@
+<div style="text-align: center; ">
+  <br/><br/>
+  <div style="box-shadow: 1px 1px 3px 2px gray; display: inline-block;  border-radius:10px; padding: 30px 50px;">
+    <div style="display: inline-block; border:1px solid black; border-radius: 20px; padding: 5px;"><img style="border-radius:20px; max-width: 200px; width: 150px;" src="https://www.gravatar.com/avatar/{{emailHash}}?d=mp&f=y"/></div><br/><br/>
+
+  <div style="text-align: center; display: inline-block;" *ngIf="user != null">
+    <div style="text-align: center;"><font style="font-size:20px; font-weight: bold;">Profil Bilgileriniz</font></div><br/>
+    <div class="profileInfoObject"><b>Adınız</b><br/>{{user.firstname}}</div><br/>
+    <div class="profileInfoObject"><b>Soyadınız</b><br/>{{user.lastname}}</div><br/>
+    <div class="profileInfoObject"><b>E-Posta Adresiniz</b><br/>{{user.email}}</div><br/>
+    <br/>
+    <div *ngIf="user.isVerified == false && sending == false"> <button (click)="resendMail()" class="btn btn-primary">E-Posta Doğrula</button><br/><br/></div>
+    <div *ngIf="user.isVerified == false && sending == true"> <button disabled class="btn btn-primary"><i class="fa fa-spinner fa-spin"></i> Kod Gönderiliyor.</button><br/><br/></div>
+    <button class="btn btn-primary" routerLink="/update-profile" style="margin-right:5px;">Profili Güncelle</button>
+    <button class="btn btn-primary" style="margin-left: 5px;" routerLink="/change-password">Şifre Değiştir</button>
+  </div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+</div>

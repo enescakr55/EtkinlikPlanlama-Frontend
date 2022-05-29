@@ -1,0 +1,19 @@
+<div style="text-align: center;">
+  <h4>Etkinlik Davetlerim</h4>
+  <div *ngIf="myInvitations != null">
+    <h5 *ngIf="myInvitations.length == 0"><font style="color: red;">Hiçbir etkinlik davetiniz yoktur.</font></h5>
+  </div>
+
+</div>
+<div *ngIf="myInvitations != null">
+<div *ngFor="let myInvitation of myInvitations" style="text-align: center;">
+  <div  class="infoDiv">
+    <p><b>Etkinlik Adı :</b> {{myInvitation.eventName}}</p>
+    <p><b>Etkinlik Açıklaması :</b> {{myInvitation.eventDescription}}</p>
+    <p><b>Etkinlik Tarihi :</b> {{myInvitation.eventDate | date: 'dd/MM/yyyy HH:mm'}}</p>
+    <font><b>Daveti Yanıtla : </b></font>
+    <div class="accept" (click)="accept(myInvitation.invitationCode)">Katılıyorum</div>
+    <div class="reject" (click)="reject(myInvitation.invitationCode)">Katılmıyorum</div>
+  </div>
+</div>
+</div>

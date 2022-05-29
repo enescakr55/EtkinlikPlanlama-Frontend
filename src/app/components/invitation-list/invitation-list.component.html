@@ -1,0 +1,31 @@
+<div style="text-align: center;">
+  <h4>Davetliler</h4>
+  <h5 *ngIf="InvitationInfos.length == 0"><font style="color: red;">Davetli mevcut değil</font></h5>
+  <div *ngFor="let invitationInfo of InvitationInfos" style="text-align: center;">
+  <div  class="infoDiv">
+    <p><b>Davet Edilen :</b> {{invitationInfo.eventInvitation.firstname}} {{invitationInfo.eventInvitation.lastname}} ({{invitationInfo.eventInvitation.email}})</p>
+    <font><b>Davet Durumu : </b></font><div style="display: inline-block;" *ngIf="invitationInfo.eventInvitationStatus != null">
+    <div *ngIf="invitationInfo.eventInvitationStatus">
+      <font class="accepted" *ngIf="invitationInfo.eventInvitationStatus.status == 1"> Kullanıcı davetinizi kabul etti</font>
+      <font class="rejected" *ngIf="invitationInfo.eventInvitationStatus.status == 0"> Kullanıcı davetinizi reddetti</font>
+    </div>
+
+
+    </div>
+    <font class="noReplied" *ngIf="invitationInfo.eventInvitationStatus == null"> Kullanıcı davetinize henüz yanıt vermedi</font>
+    <div *ngIf="invitationInfo.eventInvitationStatus">
+      <div style="margin-top: 10px;" *ngIf="invitationInfo.eventInvitationStatus.message != null && invitationInfo.eventInvitationStatus.message != ''"><font><b>Mesaj : </b></font><font>{{invitationInfo.eventInvitationStatus.message}}</font></div>
+    </div>
+
+  </div>
+</div>
+<h4>Katılımcılar</h4>
+<h5 *ngIf="JoinedUsers.length == 0"><font style="color: red;">Henüz etkinliğe kimse katılmamış</font></h5>
+<div *ngFor="let joinedUser of JoinedUsers" style="text-align: center;">
+  <div  class="infoDiv">
+    <p style="margin-top:10px;"><b>Kullanıcı Bilgileri : </b> {{joinedUser.firstname}} {{joinedUser.lastname}} ({{joinedUser.email}})</p>
+    <p style="margin-top:10px;"><b>Katılım Tarihi : </b> {{joinedUser.joinDate | date:'dd/MM/yyyy HH:mm'}}</p>
+
+  </div>
+</div>
+</div>

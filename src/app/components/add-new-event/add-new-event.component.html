@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-6 d-none d-md-block" style="position: relative;" *ngIf="eventCreated == false">
+    <div style="position: absolute; width: 100%; text-align: center;"><font size="5">Etkinlik Oluştur</font><br/></div>
+
+    <img src="/assets/eventCalendar.png" style="position: absolute; width: 100%;">
+  </div>
+  <div class="col-md-6">
+    <form [formGroup]="addNewEventForm" *ngIf="eventCreated == false">
+      <div class="mb-3">
+        <label for="eventName" class="form-label">Etkinlik Adı</label>
+        <input type="text" class="form-control" id="eventName" formControlName="eventName" aria-describedby="eventName" autocomplete="off">
+      </div>
+      <div class="mb-3">
+        <label for="eventDescription" class="form-label">Etkinlik Açıklaması</label>
+        <input type="text" class="form-control" formControlName="eventDescription" id="eventDescription" autocomplete="off">
+      </div>
+      <div class="mb-3">
+        <label for="eventdate" class="form-label">Etkinlik Tarihi</label>
+        <input type="date" class="form-control" formControlName="eventdate" id="eventdate" autocomplete="off">
+      </div>
+      <div class="mb-3">
+        <label for="eventtime" class="form-label">Etkinlik Saati</label>
+        <input type="time" class="form-control" formControlName="eventtime" id="eventtime" autocomplete="off">
+      </div>
+      <div class="mb-3">
+        <label for="endtime" class="form-label">Bitiş Saati</label>
+        <input type="time" class="form-control" formControlName="endtime" id="endtime" autocomplete="off">
+        <div id="endtime" class="form-text">Bitiş saati yoksa boş bırakılabilir.</div>
+      </div>
+      <div class="mb-3">
+        <label for="eventAddress" class="form-label">Etkinlik Adresi</label>
+        <input type="text" class="form-control" formControlName="eventAddress" id="eventAddress" aria-describedby="eventAddressInfo" autocomplete="off">
+        <div id="eventAddressInfo" class="form-text">Etkinlik yerinde yapılacak etkinlikler için adres, uzaktan yapılacak etkinlikler için bir link girebilirsiniz.</div>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" formControlName="isPrivate" class="form-check-input" id="isPrivate">
+        <label class="form-check-label"  for="isPrivate">Özel Etkinlik</label>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" formControlName="isOnline" class="form-check-input" id="isOnline">
+        <label class="form-check-label"  for="isOnline">Online Etkinlik</label>
+      </div>
+      <button *ngIf="creating == false" (click)="addNewEvent()" type="submit" class="btn btn-primary">Oluştur</button>
+      <button *ngIf="creating == true" type="submit" class="btn btn-primary"><i class="fa fa-spinner fa-spin"></i> Oluştur</button>
+    </form>
+
+  </div>
+  <div style="text-align: center;" class="col-md-12" *ngIf="eventCreated == true">
+    <img src="/assets/calendar.png" alt="" width="40" height="35" class="d-inline-block align-text-top">
+    <font style="font-family: monospace;">ES-Events</font>
+    <br/>
+    <font size="4">Etkinlik başarıyla oluşturuldu.</font><br/><br/>
+    <button (click)="createNewEvent()" type="submit" class="btn btn-primary">Başka Etkinlik Oluştur</button>
+  </div>
+</div>
+

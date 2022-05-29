@@ -1,0 +1,79 @@
+<div class="row" style="text-align: center;">
+  <h5>{{pageTitle}}</h5>
+</div>
+<div style="padding: 10px; box-shadow: 5px 4px 5px 2px rgb(104, 104, 104); border-radius: 15px;">
+<div class="row" >
+  <div class="col-md-6">
+    <div style="text-align: center;">
+    <h6>Etkinlik Türü</h6>
+    <div class="btn-group" role="group" name="eventType" aria-label="Basic radio toggle button group">
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btnradio1" (click)="setOnlineFilter(true)">Uzaktan</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+      <label class="btn btn-outline-primary" for="btnradio2" (click)="setOnlineFilter(false)">Etkinlik Alanında</label>
+
+      <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+      <label class="btn btn-outline-danger" for="btnradio3" (click)="setOnlineFilter(null)">Tümü</label>
+
+    </div>
+    </div>
+  </div>
+  <div class="col-md-6" *ngIf="isMyEvents == false">
+    <div style="text-align: center;">
+      <h6>Gerçekleşme Zamanı</h6>
+      <div class="btn-group" role="group" name="eventTime" aria-label="Basic radio toggle button group">
+
+      <input type="radio" class="btn-check" name="eventTime" id="oneweek" autocomplete="off">
+      <label class="btn btn-outline-primary" for="oneweek" (click)="getEventsForOneWeek()">Yakında Gerçekleşecek</label>
+
+      <input type="radio" class="btn-check" name="eventTime" id="onemonth" autocomplete="off">
+      <label class="btn btn-outline-primary" for="onemonth" (click)="getEventsForOneMonth()">30 Gün İçinde</label>
+
+      <input type="radio" class="btn-check" name="eventTime" id="alltime" autocomplete="off">
+      <label class="btn btn-outline-danger" for="alltime" (click)="getPublicEvents()">Tümü</label>
+
+
+    </div></div>
+
+
+  </div>
+</div>
+</div>
+
+<div class="row">
+  <div *ngIf="!eventList" style="text-align:center"><br/><i class="fa fa-spinner fa-spin fa-2x" aria-hidden="true"></i></div>
+  <div style="text-align: center; color:red; margin-top: 15px; padding: 5px; font-weight: bold;"><font *ngIf="eventList != null && eventList.length == 0" style="font-size: 17px;">Henüz etkinlik yok</font></div>
+  <div *ngFor="let event of eventList | eventFilter:isOnlineFilter" class="col-sm-6 col-md-6 col-lg-3" style="margin-bottom: 7px;">
+
+    <div class="card">
+      <div class="card-body">
+        <h6 class="card-title"><img src="/assets/eventCalendar.png" class="" width="28px">{{event.eventName}} </h6>
+        <div *ngIf="event.eventOwner == me && isLogged==true" (click)="deleteEvent(event.eventId)" style="color:white; background-color: red; border-radius: 10px; font-size: 18px; padding: 2px; display: inline-block; padding-left: 7px; padding-right: 7px; position: absolute; right: 10px; top:10px;" title="Etkinliği Sil"><i class="fa fa-trash" aria-hidden="true"></i></div>
+        <p class="card-text">{{event.eventDescription}}</p>
+        <ul class="list-group">
+          <li class="list-group-item"><i style="font-size:16px" class="fa fa-calendar-o" aria-hidden="true"></i> {{event.date | date:'dd/MM/yyyy'}}</li>
+          <li class="list-group-item"><i style="font-size:16px" class="fa fa-clock-o" aria-hidden="true"></i> {{event.date | date:'HH:mm'}} <font *ngIf="event.endDate"> - {{event.endDate | date:'HH:mm'}}</font></li>
+          <li (click)="getAddress(event)" style="cursor: pointer;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" *ngIf="event.isOnline" class="list-group-item"><i style="font-size:16px" class="fa fa-map-marker" aria-hidden="true"></i> Uzaktan</li>
+          <li (click)="getAddress(event)" style="cursor: pointer;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" *ngIf="!event.isOnline" class="list-group-item"><i style="font-size:16px" class="fa fa-map-marker" aria-hidden="true"></i> Adresi Görüntüle</li>
+        </ul>
+        <br/>
+          <a *ngIf="me != event.eventOwner && event.isPrivate == false" routerLink="/eventjoin/{{event.eventId}}" href="#" style="margin-right: 5px;" class="btn btn-primary">Etkinliğe Katıl</a>
+          <a *ngIf="me == event.eventOwner " routerLink="/invite/{{event.eventId}}" style="margin-right: 5px;" class="btn btn-primary">Davet Et</a>
+          <a *ngIf="me == event.eventOwner " routerLink="/invitationlist/{{event.eventId}}" href="#" style="margin-right: 5px;" class="btn btn-secondary">Katılımcıları Listele</a>
+      </div>
+    </div>
+  </div>
+
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Etkinlik Adresi</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body small">
+    {{address}}
+  </div>
+</div>
+
+</div>

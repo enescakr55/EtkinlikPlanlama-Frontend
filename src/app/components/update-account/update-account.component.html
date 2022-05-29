@@ -1,0 +1,27 @@
+
+<div style="text-align: center;">
+  <br/><br/>
+  <div style="display: inline-block; border:1px solid black; border-radius: 20px; padding: 5px;"><img style="border-radius:20px; max-width: 200px; width: 150px;" src="https://www.gravatar.com/avatar/{{emailHash}}?d=mp&f=y"/></div><br/><br/>
+  <div id="profileImageNote" class="form-text">Profil resimleri E-Posta adresinize göre GRAVATAR üzerinden çekilmektedir.<br/>GRAVATAR üzerinden düzenleyebilirsiniz.</div>
+  <form [formGroup]="userForm">
+  <div style="text-align: center; display: inline-block;" *ngIf="user != null">
+    <div style="text-align: center;"><font style="font-size:20px; font-weight: bold;">Profil Güncelle</font></div><br/>
+    <div class="profileInfoObject"><b>Adınız</b><br/>
+      <input type="text" class="form-control" formControlName="firstname" id="firstname" value="{{user.firstname}}" aria-describedby="firstname" autocomplete="off">
+    </div><br/>
+    <div class="profileInfoObject"><b>Soyadınız</b><br/>
+      <input type="text" class="form-control" formControlName="lastname" id="lastname" value="{{user.lastname}}" aria-describedby="lastname" autocomplete="off">
+    </div><br/>
+    <div class="profileInfoObject"><b>E-Posta Adresiniz</b><br/>
+      <input type="email" class="form-control" formControlName="email" id="email" value="{{user.email}}" aria-describedby="email" autocomplete="off">
+      <div id="profileImageNote" class="form-text">E-Posta adresinizi değiştirirseniz  <br/> e-posta doğrulaması yapmanız gerekmektedir.</div>
+    </div><br/>
+    <button class="btn btn-primary" (click)="updateAccount()">Güncelle</button>
+  </div>
+</form>
+  <br/>
+
+
+
+
+</div>

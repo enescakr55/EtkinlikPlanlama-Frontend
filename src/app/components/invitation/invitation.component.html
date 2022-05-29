@@ -1,0 +1,41 @@
+<div style="text-align: center;">
+<div style="text-align: center; width: 100%; display: inline-block; max-width: 400px;">
+  <img src="/assets/eventCalendar.png" class="" width="200px">
+  <div class="card" *ngIf="event != null">
+    <div class="card-body">
+      <h6 class="card-title"><img src="/assets/eventCalendar.png" class="" width="28px">{{event.eventName}}</h6>
+
+      <p class="card-text">{{event.eventDescription}}</p>
+      <ul class="list-group">
+        <li class="list-group-item"><i style="font-size:16px" class="fa fa-calendar-o" aria-hidden="true"></i> {{event.date | date:'dd/MM/yyyy'}}</li>
+        <li class="list-group-item"><i style="font-size:16px" class="fa fa-clock-o" aria-hidden="true"></i> {{event.date | date:'HH:mm'}}</li>
+        <li (click)="getAddress(event)" style="cursor: pointer;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" *ngIf="event.isOnline" class="list-group-item"><i style="font-size:16px" class="fa fa-map-marker" aria-hidden="true"></i> Uzaktan</li>
+        <li (click)="getAddress(event)" style="cursor: pointer;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBottom" aria-controls="offcanvasBottom" *ngIf="!event.isOnline" class="list-group-item"><i style="font-size:16px" class="fa fa-map-marker" aria-hidden="true"></i> Adresi Görüntüle</li>
+        <form [formGroup]="messageForm">
+          <div class="mb-3">
+            <label for="message" class="form-label">Mesaj</label>
+            <input type="text" class="form-control" formControlName="message" id="message" aria-describedby="message" autocomplete="off">
+            <div id="message" class="form-text">Davetiye için bir not bırakabilirsiniz.<br/>Bu etkinlik için daha önce bir not bıraktıysanız üstüne yazılacaktır.</div>
+          </div>
+          <button type="submit" (click)="updateInvitationStatus()" class="btn btn-primary">Güncelle</button>
+        </form>
+      </ul>
+
+      <br/>
+      <font *ngIf="isAccepted">Davet kabul edildi.</font>
+      <font *ngIf="isAccepted == false">Davet reddedildi.</font>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<div class="offcanvas offcanvas-bottom" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasBottomLabel">Etkinlik Adresi</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body small">
+    {{address}}
+  </div>
+</div>

@@ -1,0 +1,18 @@
+
+<form [formGroup]="joinEventForm" style="width: 100%; max-width: 500px; margin: auto; padding: 15px; box-shadow: 2px 3px 7px rgb(100 100 100)">
+  <h5>Etkinliğe Katıl</h5>
+  <div class="mb-3" >
+    <label for="eventName" class="form-label">E-Posta Adresiniz</label>
+    <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="email">
+  </div>
+  <div class="mb-3">
+    <label for="firstname" class="form-label">Adınız</label>
+    <input type="text" class="form-control" formControlName="firstname" id="firstname">
+  </div>
+  <div class="mb-3">
+    <label for="lastname" class="form-label">Soyadınız</label>
+    <input type="text" class="form-control" formControlName="lastname" id="lastname">
+  </div>
+  <button style="margin-right: 10px;" (click)="joinEvent()" type="submit" class="btn btn-primary">Katıl</button>
+  <button (click)="useAccountInfo()" *ngIf="isLogged == true" type="submit" class="btn btn-primary">Hesap bilgilerimi kullan</button>
+</form>
